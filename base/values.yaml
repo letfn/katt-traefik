@@ -1,5 +1,8 @@
 additionalArguments:
   - --providers.file.filename=/data/traefik-config.yaml
+  - --entryPoints.traefik.address=:53/tcp
+  - --entryPoints.traefik.address=:53/udp
+  - --entryPoints.traefik.address=:8888/tcp
 ports:
   web:
     redirectTo: websecure
