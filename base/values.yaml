@@ -1,7 +1,7 @@
 additionalArguments:
   - --providers.file.filename=/data/traefik-config.yaml
-  - --entryPoints.dnstcp.address=:53/tcp
-  - --entryPoints.dns.address=:53/udp
+  - --entryPoints.dnstcp.address=:5353/tcp
+  - --entryPoints.dns.address=:5353/udp
   - --entryPoints.cloudflared.address=:8888/tcp
 ports:
   web:
