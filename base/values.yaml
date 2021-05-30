@@ -1,8 +1,8 @@
 additionalArguments:
   - --providers.file.filename=/data/traefik-config.yaml
-  - --entryPoints.traefik.address=:53/tcp
-  - --entryPoints.traefik.address=:53/udp
-  - --entryPoints.traefik.address=:8888/tcp
+  - --entryPoints.dns_tcp.address=:53/tcp
+  - --entryPoints.dns.address=:53/udp
+  - --entryPoints.cloudflared.address=:8888/tcp
 ports:
   web:
     redirectTo: websecure
