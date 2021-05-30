@@ -1,0 +1,8 @@
+additionalArguments:
+  - --providers.file.filename=/data/traefik-config.yaml
+ports:
+  web:
+    redirectTo: websecure
+ingressRoute:
+  dashboard:
+    enabled: false
