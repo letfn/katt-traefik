@@ -149,8 +149,6 @@ spec:
         - --entrypoints.web.http.redirections.entryPoint.to=:443
         - --entrypoints.web.http.redirections.entryPoint.scheme=https
         - --providers.file.filename=/data/traefik-config.yaml
-        - --entryPoints.dnstcp.address=:5353/tcp
-        - --entryPoints.dns.address=:5353/udp
         - --entryPoints.cloudflared.address=:8888/tcp
         image: traefik:2.4.8
         imagePullPolicy: IfNotPresent
