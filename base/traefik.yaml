@@ -200,12 +200,12 @@ spec:
     port: 80
     protocol: TCP
     targetPort: web
-    nodePort: 8000
+    nodePort: 30080
   - name: websecure
     port: 443
     protocol: TCP
     targetPort: websecure
-    nodePort: 8443
+    nodePort: 30443
   selector:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/name: traefik
