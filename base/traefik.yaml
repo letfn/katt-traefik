@@ -110,7 +110,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-9.19.1
+    helm.sh/chart: traefik-10.1.1
   name: traefik
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -120,7 +120,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-9.19.1
+    helm.sh/chart: traefik-10.1.1
   name: traefik
 rules:
 - apiGroups:
@@ -157,6 +157,7 @@ rules:
   - ingressroutetcps
   - ingressrouteudps
   - middlewares
+  - middlewaretcps
   - tlsoptions
   - tlsstores
   - traefikservices
@@ -173,7 +174,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-9.19.1
+    helm.sh/chart: traefik-10.1.1
   name: traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -192,7 +193,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-9.19.1
+    helm.sh/chart: traefik-10.1.1
   name: traefik
 spec:
   ports:
@@ -200,26 +201,27 @@ spec:
     port: 80
     protocol: TCP
     targetPort: web
-    nodePort: 30080
   - name: websecure
     port: 443
     protocol: TCP
     targetPort: websecure
-    nodePort: 30443
   selector:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/name: traefik
-  type: NodePort
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations: null
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "9100"
+    prometheus.io/scrape: "true"
   labels:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-9.19.1
+    helm.sh/chart: traefik-10.1.1
   name: traefik
 spec:
   replicas: 1
@@ -239,24 +241,28 @@ spec:
         app.kubernetes.io/instance: traefik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-9.19.1
+        helm.sh/chart: traefik-10.1.1
     spec:
       containers:
       - args:
         - --global.checknewversion
         - --global.sendanonymoususage
+        - --entryPoints.metrics.address=:9100/tcp
         - --entryPoints.traefik.address=:9000/tcp
         - --entryPoints.web.address=:8000/tcp
         - --entryPoints.websecure.address=:8443/tcp
         - --api.dashboard=true
         - --ping=true
+        - --metrics.prometheus=true
+        - --metrics.prometheus.entrypoint=metrics
         - --providers.kubernetescrd
         - --providers.kubernetesingress
         - --entrypoints.web.http.redirections.entryPoint.to=:443
         - --entrypoints.web.http.redirections.entryPoint.scheme=https
         - --providers.file.filename=/data/traefik-config.yaml
         - --entryPoints.cloudflared.address=:8888/tcp
-        image: traefik:2.4.8
+        - --entrypoints.https.http.middlewares=traefik-traefik-forward-auth
+        image: traefik:2.4.9
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -269,6 +275,9 @@ spec:
           timeoutSeconds: 2
         name: traefik
         ports:
+        - containerPort: 9100
+          name: metrics
+          protocol: TCP
         - containerPort: 9000
           name: traefik
           protocol: TCP
