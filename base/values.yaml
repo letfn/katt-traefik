@@ -1,7 +1,7 @@
 additionalArguments:
   - --providers.file.filename=/data/traefik-config.yaml
   - --entryPoints.cloudflared.address=:8888/tcp
-  - --entrypoints.https.http.middlewares=traefik-traefik-forward-auth 
+  - --entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth 
   - --log.level=DEBUG
 ports:
   web:
