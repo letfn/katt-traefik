@@ -1525,7 +1525,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.1.1
+    helm.sh/chart: traefik-10.3.0
   name: traefik
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1535,7 +1535,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.1.1
+    helm.sh/chart: traefik-10.3.0
   name: traefik
 rules:
 - apiGroups:
@@ -1589,7 +1589,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.1.1
+    helm.sh/chart: traefik-10.3.0
   name: traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -1608,7 +1608,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.1.1
+    helm.sh/chart: traefik-10.3.0
   name: traefik
 spec:
   ports:
@@ -1628,15 +1628,12 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    prometheus.io/path: /metrics
-    prometheus.io/port: "9100"
-    prometheus.io/scrape: "true"
+  annotations: null
   labels:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.1.1
+    helm.sh/chart: traefik-10.3.0
   name: traefik
 spec:
   replicas: 1
@@ -1651,12 +1648,15 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations: null
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9100"
+        prometheus.io/scrape: "true"
       labels:
         app.kubernetes.io/instance: traefik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.1.1
+        helm.sh/chart: traefik-10.3.0
     spec:
       containers:
       - args:
@@ -1678,7 +1678,7 @@ spec:
         - --entryPoints.cloudflared.address=:8888/tcp
         - --entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth
         - --log.level=DEBUG
-        image: traefik:2.4.9
+        image: traefik:2.5.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
