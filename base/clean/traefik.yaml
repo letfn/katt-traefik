@@ -189,6 +189,8 @@ spec:
           - "--providers.file.filename=/data/traefik-config.yaml"
           - "--entryPoints.cloudflared.address=:8888/tcp"
           - "--entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth"
+          - "--providers.kubernetescrd.allowexternalnameservices=true"
+          - "--providers.kubernetescrd.allowCrossNamespace=false"
           - "--log.level=DEBUG"
       volumes:
         - name: data
