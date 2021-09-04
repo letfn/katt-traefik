@@ -23,6 +23,4 @@ env:
     valueFrom:
       secretKeyRef:
         name: cloudflare
-        k
-      :q
-    y: dns-token
+        key: dns-token

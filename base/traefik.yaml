@@ -1744,6 +1744,7 @@ spec:
         - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
         - --certificatesResolvers.letsencrypt.acme.dnschallenge=true
         - --certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare
+        - --certificatesResolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=30
         env:
         - name: CF_DNS_API_TOKEN
           valueFrom:
