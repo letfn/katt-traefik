@@ -1744,6 +1744,12 @@ spec:
         - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
         - --certificatesResolvers.letsencrypt.acme.dnschallenge=true
         - --certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare
+        env:
+        - name: CF_DNS_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: dns-token
+              name: cloudflare
         image: traefik:2.5.1
         imagePullPolicy: IfNotPresent
         livenessProbe:

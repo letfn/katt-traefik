@@ -17,3 +17,9 @@ ports:
 ingressRoute:
   dashboard:
     enabled: false
+env:
+  - name: CF_DNS_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare
+        key: dns-token
