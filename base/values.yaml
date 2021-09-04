@@ -11,6 +11,7 @@ additionalArguments:
   - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
   - --certificatesResolvers.letsencrypt.acme.dnschallenge=true
   - --certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare
+  - --certificatesResolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=30
 ports:
   web:
     redirectTo: websecure
@@ -22,4 +23,6 @@ env:
     valueFrom:
       secretKeyRef:
         name: cloudflare
-        key: dns-token
+        k
+      :q
+    y: dns-token
