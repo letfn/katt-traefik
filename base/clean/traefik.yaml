@@ -6,7 +6,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -18,7 +18,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 rules:
@@ -73,7 +73,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 roleRef:
@@ -92,7 +92,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -115,7 +115,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.2
+        helm.sh/chart: traefik-10.3.4
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
     spec:
@@ -225,7 +225,7 @@ items:
       name: traefik
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.2
+        helm.sh/chart: traefik-10.3.4
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
       annotations:

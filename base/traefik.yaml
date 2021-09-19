@@ -1583,7 +1583,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
   name: traefik
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1593,7 +1593,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
   name: traefik
 rules:
 - apiGroups:
@@ -1647,7 +1647,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
   name: traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -1666,7 +1666,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
   name: traefik
 spec:
   ports:
@@ -1691,7 +1691,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.2
+    helm.sh/chart: traefik-10.3.4
   name: traefik
 spec:
   replicas: 1
@@ -1714,7 +1714,7 @@ spec:
         app.kubernetes.io/instance: traefik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.2
+        helm.sh/chart: traefik-10.3.4
     spec:
       containers:
       - args:
