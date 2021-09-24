@@ -6,7 +6,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -18,7 +18,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 rules:
@@ -73,7 +73,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 roleRef:
@@ -92,7 +92,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -115,7 +115,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.4
+        helm.sh/chart: traefik-10.3.5
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
     spec:
@@ -123,7 +123,7 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       containers:
-      - image: "traefik:2.5.1"
+      - image: "traefik:2.5.3"
         imagePullPolicy: IfNotPresent
         name: traefik
         resources:
@@ -199,6 +199,7 @@ spec:
           - "--certificatesResolvers.letsencrypt.acme.dnschallenge=true"
           - "--certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare"
           - "--certificatesResolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=30"
+          - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53"
         env:
           - name: CF_DNS_API_TOKEN
             valueFrom:
@@ -225,7 +226,7 @@ items:
       name: traefik
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.4
+        helm.sh/chart: traefik-10.3.5
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
       annotations:

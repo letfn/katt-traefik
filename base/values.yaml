@@ -12,6 +12,8 @@ additionalArguments:
   - --certificatesResolvers.letsencrypt.acme.dnschallenge=true
   - --certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare
   - --certificatesResolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=30
+  - --certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53
+
 ports:
   web:
     redirectTo: websecure

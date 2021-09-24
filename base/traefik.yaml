@@ -1583,7 +1583,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
   name: traefik
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1593,7 +1593,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
   name: traefik
 rules:
 - apiGroups:
@@ -1647,7 +1647,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
   name: traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -1666,7 +1666,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
   name: traefik
 spec:
   ports:
@@ -1691,7 +1691,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.4
+    helm.sh/chart: traefik-10.3.5
   name: traefik
 spec:
   replicas: 1
@@ -1714,7 +1714,7 @@ spec:
         app.kubernetes.io/instance: traefik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.4
+        helm.sh/chart: traefik-10.3.5
     spec:
       containers:
       - args:
@@ -1745,13 +1745,14 @@ spec:
         - --certificatesResolvers.letsencrypt.acme.dnschallenge=true
         - --certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare
         - --certificatesResolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=30
+        - --certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53
         env:
         - name: CF_DNS_API_TOKEN
           valueFrom:
             secretKeyRef:
               key: dns-token
               name: cloudflare
-        image: traefik:2.5.1
+        image: traefik:2.5.3
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
