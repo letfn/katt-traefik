@@ -2,5 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - traefik.yaml
+  - namespace.yaml
+  - main.yaml
   - config.yaml
+
+patches:
+  - path: patch-deployment-kuma-gateway.yaml
+    target:
+      kind: Deployment
+      name: traefik

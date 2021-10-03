@@ -1,0 +1,3 @@
+- op: replace
+  path: /spec/template/metadata/annotations/kuma.io~1gateway
+  value: enabled

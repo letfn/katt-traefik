@@ -1225,6 +1225,7 @@ spec:
                     enum:
                     - NoClientCert
                     - RequestClientCert
+                    - RequireAnyClientCert
                     - VerifyClientCertIfGiven
                     - RequireAndVerifyClientCert
                     type: string
@@ -1605,7 +1606,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.5
+    helm.sh/chart: traefik-10.3.6
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -1617,7 +1618,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.5
+    helm.sh/chart: traefik-10.3.6
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 rules:
@@ -1672,7 +1673,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.5
+    helm.sh/chart: traefik-10.3.6
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 roleRef:
@@ -1691,7 +1692,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.5
+    helm.sh/chart: traefik-10.3.6
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -1714,7 +1715,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.5
+        helm.sh/chart: traefik-10.3.6
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
     spec:
@@ -1825,7 +1826,7 @@ items:
       name: traefik
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.5
+        helm.sh/chart: traefik-10.3.6
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
       annotations:

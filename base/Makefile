@@ -1,13 +1,16 @@
-build: clean traefik.yaml
+build: clean main.yaml ../main.yaml
 
-traefik.yaml: clean/traefik.yaml
-	kustomize build clean > traefik.yaml
+../main.yaml: main.yaml
+	kustomize build >$@
 
-clean/traefik.yaml: values.yaml
+main.yaml: clean/main.yaml
+	kustomize build clean >$@
+
+clean/main.yaml: values.yaml
 	-helm repo add traefik https://helm.traefik.io/traefik
 	helm repo update
-	helm template traefik traefik/traefik --version 10.3.5 --namespace=traefik --values=values.yaml --include-crds --kube-version 1.21 >$@
+	helm template traefik traefik/traefik --version 10.3.6 --namespace=traefik --values=values.yaml --include-crds --kube-version 1.21 >$@
 
 .PHONY: clean
 clean:
-	rm -f clean/traefik.yaml
+	rm -f clean/main.yaml
