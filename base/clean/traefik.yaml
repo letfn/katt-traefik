@@ -1783,8 +1783,6 @@ spec:
           - "--metrics.prometheus.entrypoint=metrics"
           - "--providers.kubernetescrd"
           - "--providers.kubernetesingress"
-          - "--entrypoints.web.http.redirections.entryPoint.to=:443"
-          - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
           - "--providers.file.filename=/traefik/traefik-config.yaml"
           - "--entryPoints.cloudflared.address=:8081/tcp"
           - "--entryPoints.tailscale.address=:8082/tcp"
