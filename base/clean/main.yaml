@@ -744,6 +744,7 @@ spec:
                       type: string
                     type: object
                   featurePolicy:
+                    description: 'Deprecated: use PermissionsPolicy instead.'
                     type: string
                   forceSTSHeader:
                     type: boolean
@@ -755,6 +756,8 @@ spec:
                     type: array
                   isDevelopment:
                     type: boolean
+                  permissionsPolicy:
+                    type: string
                   publicKey:
                     type: string
                   referrerPolicy:
@@ -1147,6 +1150,10 @@ spec:
                 description: If non-zero, controls the maximum idle (keep-alive) to
                   keep per-host. If zero, DefaultMaxIdleConnsPerHost is used.
                 type: integer
+              peerCertURI:
+                description: Defines the URI used to match against SAN URIs during
+                  the server's certificate verification.
+                type: string
               rootCAsSecrets:
                 description: Add cert file for self-signed certificate.
                 items:
@@ -1606,7 +1613,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -1618,7 +1625,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 rules:
@@ -1673,7 +1680,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 roleRef:
@@ -1692,7 +1699,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -1715,7 +1722,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.6
+        helm.sh/chart: traefik-10.6.0
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
     spec:
@@ -1826,7 +1833,7 @@ items:
       name: traefik
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.6
+        helm.sh/chart: traefik-10.6.0
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
       annotations:

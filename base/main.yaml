@@ -736,6 +736,7 @@ spec:
                       type: string
                     type: object
                   featurePolicy:
+                    description: 'Deprecated: use PermissionsPolicy instead.'
                     type: string
                   forceSTSHeader:
                     type: boolean
@@ -747,6 +748,8 @@ spec:
                     type: array
                   isDevelopment:
                     type: boolean
+                  permissionsPolicy:
+                    type: string
                   publicKey:
                     type: string
                   referrerPolicy:
@@ -1135,6 +1138,10 @@ spec:
                 description: If non-zero, controls the maximum idle (keep-alive) to
                   keep per-host. If zero, DefaultMaxIdleConnsPerHost is used.
                 type: integer
+              peerCertURI:
+                description: Defines the URI used to match against SAN URIs during
+                  the server's certificate verification.
+                type: string
               rootCAsSecrets:
                 description: Add cert file for self-signed certificate.
                 items:
@@ -1588,7 +1595,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
   name: traefik
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1598,7 +1605,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
   name: traefik
 rules:
 - apiGroups:
@@ -1652,7 +1659,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
   name: traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -1671,7 +1678,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
   name: traefik
 spec:
   ports:
@@ -1696,7 +1703,7 @@ metadata:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.3.6
+    helm.sh/chart: traefik-10.6.0
   name: traefik
 spec:
   replicas: 1
@@ -1719,7 +1726,7 @@ spec:
         app.kubernetes.io/instance: traefik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.3.6
+        helm.sh/chart: traefik-10.6.0
     spec:
       containers:
       - args:
