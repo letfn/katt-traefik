@@ -1,7 +1,4 @@
 additionalArguments:
-  - --providers.file.filename=/traefik/traefik-config.yaml
-  - --entryPoints.cloudflared.address=:8081/tcp
-  - --entryPoints.tailscale.address=:8082/tcp
   - --entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth 
   - --providers.kubernetescrd.allowexternalnameservices=true
   - --providers.kubernetescrd.allowCrossNamespace=false

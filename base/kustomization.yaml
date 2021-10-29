@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - main.yaml
-  - config.yaml
 
 patches:
   - path: patch-deployment-kuma-gateway.yaml
