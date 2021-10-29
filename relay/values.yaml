@@ -1,0 +1,11 @@
+additionalArguments:
+  - --providers.kubernetescrd.allowexternalnameservices=true
+  - --providers.kubernetescrd.allowCrossNamespace=false
+  - --log.level=DEBUG
+  - --accesslog=true
+  - --serverstransport.insecureskipverify=true
+  - --global.sendanonymoususage=false
+
+ingressRoute:
+  dashboard:
+    enabled: false

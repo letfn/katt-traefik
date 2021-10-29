@@ -1,3 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    kuma.io/sidecar-injection: enabled
+  name: traefik
+---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1698,7 +1705,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations: null
   labels:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/managed-by: Helm
@@ -1719,6 +1725,7 @@ spec:
   template:
     metadata:
       annotations:
+        kuma.io/gateway: disabled
         prometheus.io/path: /metrics
         prometheus.io/port: "9100"
         prometheus.io/scrape: "true"
@@ -1742,27 +1749,12 @@ spec:
         - --metrics.prometheus.entrypoint=metrics
         - --providers.kubernetescrd
         - --providers.kubernetesingress
-        - --entrypoints.web.http.redirections.entryPoint.to=:443
-        - --entrypoints.web.http.redirections.entryPoint.scheme=https
-        - --entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth
         - --providers.kubernetescrd.allowexternalnameservices=true
         - --providers.kubernetescrd.allowCrossNamespace=false
         - --log.level=DEBUG
         - --accesslog=true
         - --serverstransport.insecureskipverify=true
-        - --certificatesresolvers.letsencrypt.acme.email=iam@defn.sh
-        - --certificatesresolvers.letsencrypt.acme.storage=/data/acme/acme.json
-        - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
-        - --certificatesResolvers.letsencrypt.acme.dnschallenge=true
-        - --certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare
-        - --certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=108.162.193.160:53
         - --global.sendanonymoususage=false
-        env:
-        - name: CF_DNS_API_TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: dns-token
-              name: cloudflare
         image: traefik:2.5.3
         imagePullPolicy: IfNotPresent
         livenessProbe:

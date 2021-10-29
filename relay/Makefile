@@ -1,6 +1,6 @@
-build: clean main.yaml ../base.yaml
+build: clean main.yaml ../relay.yaml
 
-../base.yaml: main.yaml
+../relay.yaml: main.yaml
 	kustomize build >$@
 
 main.yaml: clean/main.yaml
