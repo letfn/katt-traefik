@@ -1733,7 +1733,7 @@ spec:
         - --global.checknewversion
         - --global.sendanonymoususage
         - --entryPoints.metrics.address=:9100/tcp
-        - --entryPoints.traefik.address=:9000/tcp
+        - --entryPoints.traefik.address=:9200/tcp
         - --entryPoints.web.address=:8000/tcp
         - --entryPoints.websecure.address=:8443/tcp
         - --api.dashboard=true
@@ -1754,7 +1754,7 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /ping
-            port: 9000
+            port: 9200
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
@@ -1764,7 +1764,7 @@ spec:
         - containerPort: 9100
           name: metrics
           protocol: TCP
-        - containerPort: 9000
+        - containerPort: 9200
           name: traefik
           protocol: TCP
         - containerPort: 8000
@@ -1777,7 +1777,7 @@ spec:
           failureThreshold: 1
           httpGet:
             path: /ping
-            port: 9000
+            port: 9200
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1

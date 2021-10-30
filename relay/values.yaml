@@ -9,3 +9,7 @@ additionalArguments:
 ingressRoute:
   dashboard:
     enabled: false
+
+ports:
+  traefik:
+    port: 9200
