@@ -13,3 +13,5 @@ ingressRoute:
 ports:
   traefik:
     port: 9200
+  websecure:
+    expose: false
