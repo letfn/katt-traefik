@@ -13,6 +13,9 @@ additionalArguments:
   - --certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=108.162.193.160:53
   - --global.sendanonymoususage=false
 
+ports:
+  web:
+    redirectTo: websecure
 ingressRoute:
   dashboard:
     enabled: false
