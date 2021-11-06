@@ -1791,8 +1791,6 @@ spec:
           - "--metrics.prometheus.entrypoint=metrics"
           - "--providers.kubernetescrd"
           - "--providers.kubernetesingress"
-          - "--entrypoints.web.http.redirections.entryPoint.to=:443"
-          - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
           - "--entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth"
           - "--providers.kubernetescrd.allowexternalnameservices=true"
           - "--providers.kubernetescrd.allowCrossNamespace=false"
