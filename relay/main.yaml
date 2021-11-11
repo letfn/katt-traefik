@@ -1686,6 +1686,14 @@ spec:
     port: 80
     protocol: TCP
     targetPort: web
+  - name: registry
+    port: 5000
+    protocol: TCP
+    targetPort: registry
+  - name: sshd
+    port: 2222
+    protocol: TCP
+    targetPort: sshd
   selector:
     app.kubernetes.io/instance: traefik
     app.kubernetes.io/name: traefik
@@ -1770,6 +1778,12 @@ spec:
           protocol: TCP
         - containerPort: 8443
           name: websecure
+          protocol: TCP
+        - containerPort: 5000
+          name: registry
+          protocol: TCP
+        - containerPort: 2222
+          name: sshd
           protocol: TCP
         readinessProbe:
           failureThreshold: 1
