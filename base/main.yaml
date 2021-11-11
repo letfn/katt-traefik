@@ -1744,6 +1744,8 @@ spec:
         - --providers.kubernetesingress
         - --entrypoints.web.http.redirections.entryPoint.to=:443
         - --entrypoints.web.http.redirections.entryPoint.scheme=https
+        - --entryPoints.registry.address=:5000/tcp
+        - --entryPoints.sshd.address=:2222/tcp
         - --entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth
         - --providers.kubernetescrd.allowexternalnameservices=true
         - --providers.kubernetescrd.allowCrossNamespace=false
