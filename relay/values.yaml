@@ -8,17 +8,6 @@ additionalArguments:
   - --entryPoints.registry.address=:5000/tcp
   - --entryPoints.sshd.address=:2222/tcp
 
-ports:
-  registry:
-    port: 5000
-    expose: true
-    exposedPort: 5000
-    protocol: TCP
-  sshd:
-    port: 2222
-    expose: true
-    exposedPort: 2222
-    protocol: TCP
 ingressRoute:
   dashboard:
     enabled: false
