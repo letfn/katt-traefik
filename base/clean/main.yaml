@@ -1793,21 +1793,19 @@ spec:
           - "--providers.kubernetesingress"
           - "--entrypoints.web.http.redirections.entryPoint.to=:443"
           - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-          - "--entryPoints.registry.address=:5000/tcp"
-          - "--entryPoints.sshd.address=:2222/tcp"
           - "--entrypoints.websecure.http.middlewares=traefik-traefik-forward-auth"
           - "--providers.kubernetescrd.allowexternalnameservices=true"
           - "--providers.kubernetescrd.allowCrossNamespace=false"
           - "--log.level=DEBUG"
           - "--accesslog=true"
           - "--serverstransport.insecureskipverify=true"
+          - "--global.sendanonymoususage=false"
           - "--certificatesresolvers.letsencrypt.acme.email=iam@defn.sh"
           - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme/acme.json"
           - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
           - "--certificatesResolvers.letsencrypt.acme.dnschallenge=true"
           - "--certificatesResolvers.letsencrypt.acme.dnschallenge.provider=cloudflare"
           - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=108.162.193.160:53"
-          - "--global.sendanonymoususage=false"
         env:
           - name: CF_DNS_API_TOKEN
             valueFrom:
