@@ -1751,8 +1751,6 @@ spec:
         - --accesslog=true
         - --serverstransport.insecureskipverify=true
         - --global.sendanonymoususage=false
-        - --entryPoints.registry.address=:5000/tcp
-        - --entryPoints.sshd.address=:2222/tcp
         image: traefik:2.5.3
         imagePullPolicy: IfNotPresent
         livenessProbe:

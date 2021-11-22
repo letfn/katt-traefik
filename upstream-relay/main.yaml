@@ -1,3 +1,5 @@
+---
+# Source: crds/ingressroute.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -194,7 +196,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/ingressroutetcp.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -353,7 +357,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/ingressrouteudp.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -436,7 +442,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/middlewares.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1001,7 +1009,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/middlewarestcp.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1059,7 +1069,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/serverstransports.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1163,7 +1175,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/tlsoptions.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1254,7 +1268,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/tlsstores.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1317,7 +1333,9 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
+# Source: crds/traefikservices.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -1586,201 +1604,167 @@ status:
     plural: ""
   conditions: []
   storedVersions: []
+
 ---
-apiVersion: v1
+# Source: traefik/templates/rbac/serviceaccount.yaml
 kind: ServiceAccount
+apiVersion: v1
 metadata:
-  annotations: null
+  name: traefik
   labels:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     helm.sh/chart: traefik-10.6.0
-  name: traefik
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: traefik
+  annotations:
 ---
-apiVersion: rbac.authorization.k8s.io/v1
+# Source: traefik/templates/rbac/clusterrole.yaml
 kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.6.0
-  name: traefik
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - services
-  - endpoints
-  - secrets
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - extensions
-  - networking.k8s.io
-  resources:
-  - ingresses
-  - ingressclasses
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - extensions
-  - networking.k8s.io
-  resources:
-  - ingresses/status
-  verbs:
-  - update
-- apiGroups:
-  - traefik.containo.us
-  resources:
-  - ingressroutes
-  - ingressroutetcps
-  - ingressrouteudps
-  - middlewares
-  - middlewaretcps
-  - tlsoptions
-  - tlsstores
-  - traefikservices
-  - serverstransports
-  verbs:
-  - get
-  - list
-  - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
 metadata:
+  name: traefik
   labels:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     helm.sh/chart: traefik-10.6.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: traefik
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - endpoints
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingressclasses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses/status
+    verbs:
+      - update
+  - apiGroups:
+      - traefik.containo.us
+    resources:
+      - ingressroutes
+      - ingressroutetcps
+      - ingressrouteudps
+      - middlewares
+      - middlewaretcps
+      - tlsoptions
+      - tlsstores
+      - traefikservices
+      - serverstransports
+    verbs:
+      - get
+      - list
+      - watch
+---
+# Source: traefik/templates/rbac/clusterrolebinding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
   name: traefik
+  labels:
+    app.kubernetes.io/name: traefik
+    helm.sh/chart: traefik-10.6.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: traefik
 subjects:
-- kind: ServiceAccount
-  name: traefik
-  namespace: traefik
+  - kind: ServiceAccount
+    name: traefik
+    namespace: traefik
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  annotations: null
-  labels:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.6.0
-  name: traefik
-spec:
-  ports:
-  - name: web
-    port: 80
-    protocol: TCP
-    targetPort: web
-  selector:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/name: traefik
-  type: LoadBalancer
----
+# Source: traefik/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations: null
+  name: traefik
   labels:
-    app.kubernetes.io/instance: traefik
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     helm.sh/chart: traefik-10.6.0
-  name: traefik
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: traefik
+  annotations:
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/instance: traefik
       app.kubernetes.io/name: traefik
+      app.kubernetes.io/instance: traefik
   strategy:
+    type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-    type: RollingUpdate
-  template:
+  template: 
     metadata:
       annotations:
-        prometheus.io/path: /metrics
-        prometheus.io/port: "9100"
         prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9100"
       labels:
-        app.kubernetes.io/instance: traefik
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
         helm.sh/chart: traefik-10.6.0
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/instance: traefik
     spec:
+      serviceAccountName: traefik
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
       containers:
-      - args:
-        - --global.checknewversion
-        - --global.sendanonymoususage
-        - --entryPoints.metrics.address=:9100/tcp
-        - --entryPoints.traefik.address=:9200/tcp
-        - --entryPoints.web.address=:8000/tcp
-        - --entryPoints.websecure.address=:8443/tcp
-        - --api.dashboard=true
-        - --ping=true
-        - --metrics.prometheus=true
-        - --metrics.prometheus.entrypoint=metrics
-        - --providers.kubernetescrd
-        - --providers.kubernetesingress
-        - --providers.kubernetescrd.allowexternalnameservices=true
-        - --providers.kubernetescrd.allowCrossNamespace=false
-        - --log.level=DEBUG
-        - --accesslog=true
-        - --serverstransport.insecureskipverify=true
-        - --global.sendanonymoususage=false
-        - --entryPoints.registry.address=:5000/tcp
-        - --entryPoints.sshd.address=:2222/tcp
-        image: traefik:2.5.3
+      - image: "traefik:2.5.3"
         imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /ping
-            port: 9200
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 2
         name: traefik
-        ports:
-        - containerPort: 9100
-          name: metrics
-          protocol: TCP
-        - containerPort: 9200
-          name: traefik
-          protocol: TCP
-        - containerPort: 8000
-          name: web
-          protocol: TCP
-        - containerPort: 8443
-          name: websecure
-          protocol: TCP
+        resources:
         readinessProbe:
-          failureThreshold: 1
           httpGet:
             path: /ping
             port: 9200
+          failureThreshold: 1
           initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 2
-        resources: null
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 9200
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        ports:
+        - name: "metrics"
+          containerPort: 9100
+          protocol: "TCP"
+        - name: "traefik"
+          containerPort: 9200
+          protocol: "TCP"
+        - name: "web"
+          containerPort: 8000
+          protocol: "TCP"
+        - name: "websecure"
+          containerPort: 8443
+          protocol: "TCP"
         securityContext:
           capabilities:
             drop:
@@ -1790,17 +1774,60 @@ spec:
           runAsNonRoot: true
           runAsUser: 65532
         volumeMounts:
-        - mountPath: /data
-          name: data
-        - mountPath: /tmp
-          name: tmp
-      hostNetwork: false
+          - name: data
+            mountPath: /data
+          - name: tmp
+            mountPath: /tmp
+        args:
+          - "--global.checknewversion"
+          - "--global.sendanonymoususage"
+          - "--entryPoints.metrics.address=:9100/tcp"
+          - "--entryPoints.traefik.address=:9200/tcp"
+          - "--entryPoints.web.address=:8000/tcp"
+          - "--entryPoints.websecure.address=:8443/tcp"
+          - "--api.dashboard=true"
+          - "--ping=true"
+          - "--metrics.prometheus=true"
+          - "--metrics.prometheus.entrypoint=metrics"
+          - "--providers.kubernetescrd"
+          - "--providers.kubernetesingress"
+          - "--providers.kubernetescrd.allowexternalnameservices=true"
+          - "--providers.kubernetescrd.allowCrossNamespace=false"
+          - "--log.level=DEBUG"
+          - "--accesslog=true"
+          - "--serverstransport.insecureskipverify=true"
+          - "--global.sendanonymoususage=false"
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
       securityContext:
         fsGroup: 65532
-      serviceAccountName: traefik
-      terminationGracePeriodSeconds: 60
-      volumes:
-      - emptyDir: {}
-        name: data
-      - emptyDir: {}
-        name: tmp
+---
+# Source: traefik/templates/service.yaml
+apiVersion: v1
+kind: List
+metadata:
+  name: traefik
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: traefik
+      labels:
+        app.kubernetes.io/name: traefik
+        helm.sh/chart: traefik-10.6.0
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/instance: traefik
+      annotations:
+    spec:
+      type: LoadBalancer
+      selector:
+        app.kubernetes.io/name: traefik
+        app.kubernetes.io/instance: traefik
+      ports:
+      - port: 80
+        name: web
+        targetPort: "web"
+        protocol: "TCP"
