@@ -1,14 +1,6 @@
-package boot
+package template
 
-import (
-	"github.com/defn/boot"
-	"tool/exec"
-)
-
-command: vendor: exec.Run & {
-	cmd: "hof mod vendor"
+command: {
+	args: string @tag(args)
 }
-
-command: gen: boot.#Command & {
-	"repo": repo
-}
+command: bootContext
