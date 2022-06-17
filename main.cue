@@ -1,13 +1,13 @@
 package template
 
 import (
-        "github.com/defn/boot/project"
+	"github.com/defn/boot/project"
 )
 
 #BootContext: {
-        project.#Project
+	project.#Project
 }
 
 bootContext: #BootContext & {
-        codeowners: ["@jojomomojo", "@amanibhavam"]
+	codeowners: ["@jojomomojo", "@amanibhavam"]
 }

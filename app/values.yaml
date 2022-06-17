@@ -1,0 +1,15 @@
+ports:
+  traefik:
+    port: 9200
+  web:
+    redirectTo: websecure
+ingressRoute:
+  dashboard:
+    enabled: false
+additionalArguments:
+  - --providers.kubernetescrd.allowexternalnameservices=true
+  - --providers.kubernetescrd.allowCrossNamespace=false
+  - --log.level=DEBUG
+  - --accesslog=true
+  - --serverstransport.insecureskipverify=true
+  - --global.sendanonymoususage=false
