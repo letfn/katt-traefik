@@ -1768,7 +1768,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /ping
-            port: 9200
+            port: 9000
           failureThreshold: 1
           initialDelaySeconds: 10
           periodSeconds: 10
@@ -1777,7 +1777,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /ping
-            port: 9200
+            port: 9000
           failureThreshold: 3
           initialDelaySeconds: 10
           periodSeconds: 10
@@ -1788,7 +1788,7 @@ spec:
           containerPort: 9100
           protocol: "TCP"
         - name: "traefik"
-          containerPort: 9200
+          containerPort: 9000
           protocol: "TCP"
         - name: "web"
           containerPort: 8000
@@ -1813,10 +1813,11 @@ spec:
           - "--global.checknewversion"
           - "--global.sendanonymoususage"
           - "--entrypoints.metrics.address=:9100/tcp"
-          - "--entrypoints.traefik.address=:9200/tcp"
+          - "--entrypoints.traefik.address=:9000/tcp"
           - "--entrypoints.web.address=:8000/tcp"
           - "--entrypoints.websecure.address=:8443/tcp"
           - "--api.dashboard=true"
+          - "--api.insecure=true"
           - "--ping=true"
           - "--metrics.prometheus=true"
           - "--metrics.prometheus.entrypoint=metrics"
@@ -1870,18 +1871,3 @@ items:
         targetPort: "websecure"
         nodePort: 30443
         protocol: TCP
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: dashboard
-spec:
-  entryPoints:
-    - web
-    - websecure
-  routes:
-    - match: (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
-      kind: Rule
-      services:
-        - name: api@internal
-          kind: TraefikService
